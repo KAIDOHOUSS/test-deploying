@@ -15,8 +15,9 @@ const PORT = process.env.PORT || 5000;
 // Trust proxy setting (important for rate limiting and security)
 app.set('trust proxy', 1);
 
-// serve static files from react app
+// Serve static files from the React build directory
 app.use(express.static(path.join(__dirname, '../client/build')));
+
 // Security middleware
 app.use(helmet({
   contentSecurityPolicy: {
@@ -34,11 +35,9 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
   message: 'Too many requests from this IP, please try again later.',
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-  // Skip successful requests (optional)
+  standardHeaders: true,
+  legacyHeaders: false,
   skipSuccessfulRequests: false,
-  // Skip failed requests (optional)
   skipFailedRequests: false,
 });
 app.use('/api/', limiter);
@@ -50,7 +49,7 @@ app.use(cors({
     : ['http://localhost:3000'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 // Logging middleware
@@ -68,11 +67,6 @@ app.use(express.urlencoded({ extended: true }));
 // Cookie parser
 app.use(cookieParser());
 
-// Serve static files from React build
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')));
-}
-
 // Custom middleware for request logging
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
@@ -84,92 +78,70 @@ app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    uptime: process.uptime()
+    uptime: process.uptime(),
   });
 });
 
 // Example API routes
 app.get('/api/users', (req, res) => {
-  // Sample data - replace with actual database queries
   const users = [
     { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
   ];
   res.json(users);
 });
 
 app.post('/api/users', (req, res) => {
   const { name, email } = req.body;
-  
-  // Validation
   if (!name || !email) {
     return res.status(400).json({ 
-      error: 'Name and email are required' 
+      error: 'Name and email are required',
     });
   }
-  
-  // Sample response - replace with actual database logic
   const newUser = {
     id: Date.now(),
     name,
     email,
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
   };
-  
   res.status(201).json(newUser);
 });
 
 app.put('/api/users/:id', (req, res) => {
   const { id } = req.params;
   const { name, email } = req.body;
-  
-  // Sample response - replace with actual database logic
   res.json({
     id: parseInt(id),
     name,
     email,
-    updatedAt: new Date().toISOString()
+    updatedAt: new Date().toISOString(),
   });
 });
 
 app.delete('/api/users/:id', (req, res) => {
   const { id } = req.params;
-  
-  // Sample response - replace with actual database logic
   res.json({
     message: `User ${id} deleted successfully`,
-    deletedAt: new Date().toISOString()
+    deletedAt: new Date().toISOString(),
   });
 });
-
-// Serve React app for any non-API routes (in production)
-if (process.env.NODE_ENV === 'production') {
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build/index.html'));
-  });
-}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Error:', err.stack);
-  
   if (err.type === 'entity.parse.failed') {
     return res.status(400).json({ error: 'Invalid JSON payload' });
   }
-  
   res.status(500).json({ 
     error: process.env.NODE_ENV === 'production' 
       ? 'Internal server error' 
-      : err.message 
+      : err.message,
   });
 });
 
-// 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({ 
-    error: 'Route not found',
-    path: req.originalUrl 
-  });
+// Serve React app for all non-API routes (in production and development)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
 // Graceful shutdown
