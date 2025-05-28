@@ -1,0 +1,22 @@
+# Node modules
+/node_modules/
+/client/node_modules
+/server/node_modules/
+
+# React build output (ignored in Git, built during deployment)
+client/build/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+**/.env
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
