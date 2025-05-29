@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import Slide from '../bootstrap/SlideImages';
+=======
+>>>>>>> 39cfd6cc4827bae505a9e8a863f23b2220a1ac2d
 
 const HomePage = () => {
   const [users, setUsers] = useState([]);
