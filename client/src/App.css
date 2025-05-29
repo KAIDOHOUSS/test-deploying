@@ -255,7 +255,11 @@ body {
     transition: transform 0.3s ease-in-out;
   }
   
+<<<<<<< HEAD
   .navi-menu.nav-open {
+=======
+  .nav-menu.nav-open {
+>>>>>>> 39cfd6cc4827bae505a9e8a863f23b2220a1ac2d
     display: flex;
     transform: translateX(0);
   }
