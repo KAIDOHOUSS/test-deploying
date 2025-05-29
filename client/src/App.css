@@ -645,6 +645,11 @@ body {
   font-size: 1rem;
   color: #4b5563;
 }
+.line{
+  margin: 2rem;
+  width: 100%;
+  border: 5px solid;
+}
 .teachers-section {
   max-width: 1200px;
   margin: 5rem auto;
@@ -684,6 +689,10 @@ body {
   background-color: #e2e8f0;
   border-radius: 50%;
   margin: 0 auto 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
 }
 
 .teacher-name {
@@ -706,8 +715,7 @@ padding: 2rem;
 }
 .comment-card{
 padding: 1rem;
-height: 200px;
-border-radius: 12px;
+border-radius: 20%;
 background-color: #00000080;
 color: white;
 display: flex;
@@ -718,6 +726,11 @@ width: 60px;
   height: 60px;
   background-color: #e2e8f0;
   border-radius: 50%;
+   display: flex;
+  justify-content: center; /* center icon horizontally */
+  align-items: center;
+  font-size: 30px;
+
 }
 .comment-card p {
 text-align: right;
@@ -731,8 +744,10 @@ text-align: right;
 }
 .comment{
   width: 100%;
-  height: 100%;
+  height: auto;
   padding: 0.5rem;
+    word-wrap: break-word;
+  white-space: pre-wrap;
 
 }
 
@@ -783,11 +798,14 @@ text-align: right;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
-
+.contact-info{
+    width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 .contact-info h2 {
   font-size: 1.875rem;
   font-weight: 700;
-  color: #1e3a8a;
   margin-bottom: 1.5rem;
 }
 
@@ -804,6 +822,16 @@ text-align: right;
 
 .contact-item p {
   color: #4b5563;
+}
+.contact-icon{
+  background:none;
+  border: none;
+  font-size: 100px;
+  cursor: pointer;
+ width: auto;
+}
+.contact-icon:hover{
+  font-size: 102px;
 }
 
 .contact-form-container {
@@ -846,6 +874,10 @@ text-align: right;
 
 /* Responsive design */
 @media (max-width: 1024px) {
+  .contact-info{
+  flex-direction: row;
+  justify-content: space-around;
+}
   .contact-grid {
     grid-template-columns: 1fr;
   }

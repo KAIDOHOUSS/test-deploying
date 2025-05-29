@@ -1,3 +1,7 @@
+import { FaFacebook } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
+import { FaPhoneSquareAlt } from "react-icons/fa";
+
 export const teachers = [
     {
       name: 'الأستاذة',
@@ -29,7 +33,7 @@ export const teachers = [
      { id: 1, username: "َAhmed", comment: "منصة رائعة" },
   { id: 2, username: "ليلى", comment: "لقد استفدت الكثير" },
   { id: 3, username: "wail", comment: "شيء رائع" },
-  { id: 4, username: "سارة", comment: "محتوى مفيد ومنظم" },
+  { id: 4, username: "سارة", comment: "محتوى مفيدdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss ومنظم" },
   { id: 5, username: "ياسر", comment: "شكراً لكم على هذا الجهد" },
   ]
   export  const services = [
@@ -38,3 +42,13 @@ export const teachers = [
     { id: 3, title: 'Cloud Solutions', description: 'Scalable cloud infrastructure and deployment', icon: '🔴' ,img :'/ph/cour1.jpg',level :'Advanced'},
     { id: 4, title: 'Consulting', description: 'Technical consulting and architecture planning', icon: '🟢',img :'/ph/cour1.jpg' , level : 'Beginner'},
   ];
+  export const contacts = [
+    {
+      icon :<FaFacebook color="blue"/> ,link:'https://www.facebook.com/houssem.bz.92/'
+    },
+     {
+      icon :<SiGmail color="red"/> ,link:'mailto:kaidohoussem@gmail.com'
+    },{
+      icon : <FaPhoneSquareAlt color="green"/> , link:'https://wa.me/213796748570'
+    }
+  ]

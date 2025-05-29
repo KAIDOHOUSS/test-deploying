@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import {contacts} from '../data/data'
 const ContactPage = () => {
   const [contactForm, setContactForm] = useState({ name: '', email: '', subject: '', message: '' });
 
@@ -23,19 +23,9 @@ const ContactPage = () => {
         <div className="container">
           <div className="contact-grid">
             <div className="contact-info">
-              <h2>Get In Touch</h2>
-              <div className="contact-item">
-                <h4>📧 Email</h4>
-                <p>hello@yourapp.com</p>
-              </div>
-              <div className="contact-item">
-                <h4>📞 Phone</h4>
-                <p>+1 (555) 123-4567</p>
-              </div>
-              <div className="contact-item">
-                <h4>📍 Address</h4>
-                <p>123 Tech Street<br/>San Francisco, CA 94105</p>
-              </div>
+            {contacts.map(contact =>
+                <a className='contact-icon' href={contact.link}>{contact.icon}</a>
+            )}
             </div>
             <div className="contact-form-container">
               <form onSubmit={handleSubmit} className="contact-form">
