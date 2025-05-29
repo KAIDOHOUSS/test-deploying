@@ -255,9 +255,7 @@ body {
     transition: transform 0.3s ease-in-out;
   }
   
-
   .navi-menu.nav-open {
-  .nav-menu.nav-open {
     display: flex;
     transform: translateX(0);
   }
@@ -861,4 +859,4 @@ textarea:focus {
   .contact-form-container {
     border: 2px solid #1e3a8a;
   }
-}}
+}
