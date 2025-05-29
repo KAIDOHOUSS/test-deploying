@@ -7,6 +7,7 @@ import ContactPage from './components/Contact';
 import NotFoundPage from './components/NotFound.jsx';
 import { LanguageProvider } from './LanguageContext.jsx';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() { 
 
 

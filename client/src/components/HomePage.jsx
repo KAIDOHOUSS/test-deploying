@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLanguage } from '../LanguageContext';
+import Slide from '../bootstrap/SlideImages';
 
 const HomePage = () => {
   const [users, setUsers] = useState([]);
@@ -7,54 +7,12 @@ const HomePage = () => {
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [showForm, setShowForm] = useState(false);
-  const { language } = useLanguage();
-
-  const translations = {
-    en: {
-      welcome: 'Welcome to React + Express App',
-      description: 'Full-stack application with modern styling and routing',
-      addUser: 'Add User',
-      cancel: 'Cancel',
-      refresh: 'Refresh',
-      nameLabel: 'Name',
-      emailLabel: 'Email',
-      namePlaceholder: 'Enter user name',
-      emailPlaceholder: 'Enter user email',
-      addUserButton: 'Add User',
-      usersManagement: 'Users Management',
-      loading: 'Loading users...',
-      noUsers: 'No users found. Add some users to get started!',
-      error: 'Error',
-      delete: 'Delete',
-      fetchUsersFailed :'Failed to fetch users',
-      addUsersFailed : 'Something went Wrong please try later '
-    },
-    ar: {
-      welcome: 'مرحبًا بكم في تطبيق React + Express',
-      description: 'تطبيق كامل بتصميم حديث وتوجيه',
-      addUser: 'إضافة مستخدم',
-      cancel: 'إلغاء',
-      refresh: 'تحديث',
-      nameLabel: 'الاسم',
-      emailLabel: 'البريد الإلكتروني',
-      namePlaceholder: 'أدخل اسم المستخدم',
-      emailPlaceholder: 'أدخل بريد المستخدم الإلكتروني',
-      addUserButton: 'إضافة مستخدم',
-      usersManagement: 'إدارة المستخدمين',
-      loading: 'جارٍ تحميل المستخدمين...',
-      noUsers: 'لم يتم العثور على مستخدمين. أضف بعض المستخدمين للبدء!',
-      error: 'خطأ',
-      delete: 'حذف',
-      fetchUsersFailed :'حدث خطأ أثناء تحميل المستخدمين',
-      addUsersFailed : 'حدث خطأ حاول لاحقا'
-    },
-  };
 
   const fetchUsers = async () => {
     try {
       setLoading(true);
       const response = await fetch('/api/users');
-      if (!response.ok) throw new Error(translations[language].error + '' + translations[language].fetchUsersFailed);
+      if (!response.ok) throw new Error('Error: Failed to fetch users');
       const data = await response.json();
       setUsers(data);
     } catch (err) {
@@ -72,7 +30,7 @@ const HomePage = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      if (!response.ok) throw new Error(translations[language].addUsersFailed );
+      if (!response.ok) throw new Error('Something went Wrong please try later');
       const newUser = await response.json();
       setUsers([...users, newUser]);
       setFormData({ name: '', email: '' });
@@ -85,7 +43,7 @@ const HomePage = () => {
   const deleteUser = async (id) => {
     try {
       const response = await fetch(`/api/users/${id}`, { method: 'DELETE' });
-      if (!response.ok) throw new Error(translations[language].error + ': Failed to delete user');
+      if (!response.ok) throw new Error('Error: Failed to delete user');
       setUsers(users.filter(user => user.id !== id));
     } catch (err) {
       setError(err.message);
@@ -103,36 +61,37 @@ const HomePage = () => {
   return (
     <>
       <header className="app-header">
-        <h1>{translations[language].welcome}</h1>
-        <p>{translations[language].description}</p>
+        <h1>Welcome to React + Express App</h1>
+        <p>Full-stack application with modern styling and routing</p>
       </header>
       <main className="main-content">
         <div className="container">
+            <Slide/>
           <div className="actions-bar">
             <button className="btn btn-primary" onClick={() => setShowForm(!showForm)}>
-              {showForm ? translations[language].cancel : translations[language].addUser}
+              {showForm ? 'Cancel' : 'Add User'}
             </button>
             <button className="btn btn-secondary" onClick={fetchUsers}>
-              {translations[language].refresh}
+              Refresh
             </button>
           </div>
           {showForm && (
             <div className="form-container">
               <form onSubmit={addUser} className="user-form">
                 <div className="form-group">
-                  <label htmlFor="name">{translations[language].nameLabel}</label>
+                  <label htmlFor="name">Name</label>
                   <input
-                    type="text"
+                    type="text"cd 
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    placeholder={translations[language].namePlaceholder}
+                    placeholder="Enter user name"
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">{translations[language].emailLabel}</label>
+                  <label htmlFor="email">Email</label>
                   <input
                     type="email"
                     id="email"
@@ -140,12 +99,12 @@ const HomePage = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    placeholder={translations[language].emailPlaceholder}
+                    placeholder="Enter user email"
                   />
                 </div>
                 <div className="form-actions">
                   <button type="submit" className="btn btn-success">
-                    {translations[language].addUserButton}
+                    Add User
                   </button>
                 </div>
               </form>
@@ -153,20 +112,20 @@ const HomePage = () => {
           )}
           {error && (
             <div className="alert alert-error">
-              <strong>{translations[language].error}:</strong> {error}
+              <strong>Error:</strong> {error}
               <button className="alert-close" onClick={() => setError(null)}>×</button>
             </div>
           )}
           <div className="users-section">
-            <h2>{translations[language].usersManagement}</h2>
+            <h2>Users Management</h2>
             {loading ? (
               <div className="loading-spinner">
                 <div className="spinner"></div>
-                <p>{translations[language].loading}</p>
+                <p>Loading users...</p>
               </div>
             ) : users.length === 0 ? (
               <div className="empty-state">
-                <p>{translations[language].noUsers}</p>
+                <p>No users found. Add some users to get started!</p>
               </div>
             ) : (
               <div className="users-grid">
@@ -179,7 +138,7 @@ const HomePage = () => {
                     </div>
                     <div className="user-actions">
                       <button className="btn btn-danger btn-small" onClick={() => deleteUser(user.id)}>
-                        {translations[language].delete}
+                        Delete
                       </button>
                     </div>
                   </div>
