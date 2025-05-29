@@ -1,50 +1,11 @@
 import { useState } from 'react';
-import { useLanguage } from '../LanguageContext';
 
 const ContactPage = () => {
   const [contactForm, setContactForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const { language } = useLanguage();
-
-  const translations = {
-    en: {
-      title: 'Contact Us',
-      description: 'Get in touch with our team',
-      getInTouch: 'Get In Touch',
-      email: 'Email',
-      emailValue: 'hello@yourapp.com',
-      phone: 'Phone',
-      phoneValue: '+1 (555) 123-4567',
-      address: 'Address',
-      addressValue: '123 Tech Street\nSan Francisco, CA 94105',
-      nameLabel: 'Name',
-      emailLabel: 'Email',
-      subjectLabel: 'Subject',
-      messageLabel: 'Message',
-      sendMessage: 'Send Message',
-      successMessage: 'Thank you for your message! We will get back to you soon.',
-    },
-    ar: {
-      title: 'اتصل بنا',
-      description: 'تواصل مع فريقنا',
-      getInTouch: 'تواصل معنا',
-      email: 'البريد الإلكتروني',
-      emailValue: 'hello@yourapp.com',
-      phone: 'الهاتف',
-      phoneValue: '+1 (555) 123-4567',
-      address: 'العنوان',
-      addressValue: '123 شارع التكنولوجيا\nسان فرانسيسكو، كاليفورنيا 94105',
-      nameLabel: 'الاسم',
-      emailLabel: 'البريد الإلكتروني',
-      subjectLabel: 'الموضوع',
-      messageLabel: 'الرسالة',
-      sendMessage: 'إرسال الرسالة',
-      successMessage: 'شكرًا على رسالتك! سنتواصل معك قريبًا.',
-    },
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(translations[language].successMessage);
+    alert('Thank you for your message! We will get back to you soon.');
     setContactForm({ name: '', email: '', subject: '', message: '' });
   };
 
@@ -55,31 +16,31 @@ const ContactPage = () => {
   return (
     <>
       <header className="app-header">
-        <h1>{translations[language].title}</h1>
-        <p>{translations[language].description}</p>
+        <h1>Contact Us</h1>
+        <p>Get in touch with our team</p>
       </header>
       <main className="main-content">
         <div className="container">
           <div className="contact-grid">
             <div className="contact-info">
-              <h2>{translations[language].getInTouch}</h2>
+              <h2>Get In Touch</h2>
               <div className="contact-item">
-                <h4>📧 {translations[language].email}</h4>
-                <p>{translations[language].emailValue}</p>
+                <h4>📧 Email</h4>
+                <p>hello@yourapp.com</p>
               </div>
               <div className="contact-item">
-                <h4>📞 {translations[language].phone}</h4>
-                <p>{translations[language].phoneValue}</p>
+                <h4>📞 Phone</h4>
+                <p>+1 (555) 123-4567</p>
               </div>
               <div className="contact-item">
-                <h4>📍 {translations[language].address}</h4>
-                <p>{translations[language].addressValue}</p>
+                <h4>📍 Address</h4>
+                <p>123 Tech Street<br/>San Francisco, CA 94105</p>
               </div>
             </div>
             <div className="contact-form-container">
               <form onSubmit={handleSubmit} className="contact-form">
                 <div className="form-group">
-                  <label htmlFor="name">{translations[language].nameLabel}</label>
+                  <label htmlFor="name">Name</label>
                   <input
                     type="text"
                     id="name"
@@ -90,7 +51,7 @@ const ContactPage = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">{translations[language].emailLabel}</label>
+                  <label htmlFor="email">Email</label>
                   <input
                     type="email"
                     id="email"
@@ -101,7 +62,7 @@ const ContactPage = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="subject">{translations[language].subjectLabel}</label>
+                  <label htmlFor="subject">Subject</label>
                   <input
                     type="text"
                     id="subject"
@@ -112,7 +73,7 @@ const ContactPage = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="message">{translations[language].messageLabel}</label>
+                  <label htmlFor="message">Message</label>
                   <textarea
                     id="message"
                     name="message"
@@ -122,7 +83,7 @@ const ContactPage = () => {
                     required
                   ></textarea>
                 </div>
-                <button type="submit" className="btn btn-primary">{translations[language].sendMessage}</button>
+                <button type="submit" className="btn btn-primary">Send Message</button>
               </form>
             </div>
           </div>
