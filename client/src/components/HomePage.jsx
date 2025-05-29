@@ -60,7 +60,7 @@ const HomePage = () => {
   return (
     <>
       <header className="app-header">
-        <h1>Welcome to React + Express App</h1>
+        <h1>Welcome to FINOVA app </h1>
         <p>Full-stack application with modern styling and routing</p>
       </header>
       <main className="main-content">
