@@ -21,8 +21,13 @@ const Navigation = () => {
     <nav className="navibar">
       <div className="nav-container">
         <div className="nav-logo">
+<<<<<<< HEAD
           <img src="/ph/logo.png" alt="Logo" className="logo-img" />
           <span className="logo-text">FINOVA</span>
+=======
+          <img src="/api/placeholder/120/40" alt="Logo" className="logo-img" />
+          <span className="logo-text">YourApp</span>
+>>>>>>> 39cfd6cc4827bae505a9e8a863f23b2220a1ac2d
         </div>
         
         <div className={`navi-menu ${isMenuOpen ? 'nav-open' : ''}`}>
