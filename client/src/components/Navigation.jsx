@@ -23,7 +23,7 @@ const Navigation = () => {
         <Link to="/"> 
         <div className="nav-logo">
           <img src="/ph/logo.png" alt="Logo" className="logo-img" />
-          <span className="logo-text">FINOVA</span>
+          <span className="logo-text">FINOV</span>
         </div>
         </Link>
         <div className={`navi-menu ${isMenuOpen ? 'nav-open' : ''}`}>
