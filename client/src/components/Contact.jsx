@@ -16,7 +16,7 @@ const ContactPage = () => {
   return (
     <>
       <header className="app-header">
-        <h1>Contact Us</h1>
+        <h1>Contac Us</h1>
         <p>Get in touch with our team</p>
       </header>
       <main className="main-content">
