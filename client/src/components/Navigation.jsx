@@ -20,15 +20,12 @@ const Navigation = () => {
   return (
     <nav className="navibar">
       <div className="nav-container">
+        <Link to="/"> 
         <div className="nav-logo">
-
           <img src="/ph/logo.png" alt="Logo" className="logo-img" />
           <span className="logo-text">FINOVA</span>
-
-          <img src="/api/placeholder/120/40" alt="Logo" className="logo-img" />
-          <span className="logo-text">YourApp</span>
         </div>
-        
+        </Link>
         <div className={`navi-menu ${isMenuOpen ? 'nav-open' : ''}`}>
           <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`} onClick={handleLinkClick}>
             Home
