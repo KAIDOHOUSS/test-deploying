@@ -41,9 +41,10 @@ const Navigation = () => {
           </Link>
         </div>
         <div className="nav-actions">
+          <Link to={'/login'}>
           <button className="btn btn-primary" title="Search">
            login
-          </button>
+          </button></Link>
           <button className={`menu-toggle ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
             <span></span>
             <span></span>
