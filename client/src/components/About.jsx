@@ -9,7 +9,7 @@ const AboutPage = () => {
   return (
     <>
       <header className="app-header">
-        {accessToken &&<h1>AbouUs</h1>}
+        {accessToken &&<h1>About Uss</h1>}
         <p>Learn more about our company and mission</p>
       </header>
       <main className="main-content">
