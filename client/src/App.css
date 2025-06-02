@@ -907,9 +907,6 @@ height: auto;
   color: blue;
   cursor: pointer;
 }
-.error-message{
-  
-}
 /* detailed service*/
 li {
 	--stop: calc(100% / var(--length) * var(--i));

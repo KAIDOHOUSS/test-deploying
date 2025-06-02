@@ -10,15 +10,12 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ServiceDetail from './components/ServiceDetail.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
-import { useState } from 'react';
-import AppContext from './components/AppContextProvider.jsx';
-function App() { 
-  const refreshAccessToken =  () =>{
-    const token = 'ezezeze'
-    return token
-  }
+import { useContext, useState } from 'react';
+import AppContextProvider ,{AppContext} from './components/AppContextProvider.jsx';
+import axios from 'axios';
+function App() {
   return (
-    <AppContext>
+    <AppContextProvider>
     <Router>
       <div className="App">
         <Navigation />
@@ -26,7 +23,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
             <Route path="/about"  element={<AboutPage />}/>
           <Route path="/services" element={<ServicesPage />} />
-          <Route path='services/:id' element={<ProtectedRoute accessToken="dsd"> <ServiceDetail/> </ProtectedRoute>}/>
+          <Route path='services/:id' element={<ProtectedRoute><ServiceDetail/></ProtectedRoute> }/>
            <Route path="/login" element={<LoginPage/>} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />
@@ -34,7 +31,7 @@ function App() {
         <footer className="app-footer"></footer>
       </div>
     </Router>
-    </AppContext>
+    </AppContextProvider>
   );
 }
 export default App;

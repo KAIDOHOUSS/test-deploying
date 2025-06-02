@@ -1,12 +1,29 @@
 import { useState } from 'react';
 import {contacts} from '../data/data'
+import { useContext } from 'react';
+import { AppContext } from './AppContextProvider';
 const ContactPage = () => {
   const [contactForm, setContactForm] = useState({ name: '', email: '', subject: '', message: '' });
-
+  const {accessToken,setError,setMessage,setShowAlert,setShowAlertError} = useContext(AppContext)
   const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Thank you for your message! We will get back to you soon.');
-    setContactForm({ name: '', email: '', subject: '', message: '' });
+        e.preventDefault();
+    try{
+    if (!accessToken){
+      setError('you have to log in first')
+     return setShowAlertError(true)
+    }
+    setMessage('message sent successfully our team will reply soon')
+    setShowAlert(true)
+  }
+     finally{
+setContactForm({ name: '', email: '', subject: '', message: '' });
+setTimeout(() => {
+  setShowAlert(false)
+setShowAlertError(false)
+setMessage('')
+setError('')
+}, 4000);
+     }
   };
 
   const handleChange = (e) => {

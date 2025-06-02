@@ -7,11 +7,13 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const rateLimit = require('express-rate-limit');
+const jwt = require('jsonwebtoken')
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
+const jwtSecret = process.env.JWT_SECRET
+const refreshSecret = process.env.REFRESH_SECRET
 // Trust proxy setting (important for rate limiting and security)
 app.set('trust proxy', 1);
 
@@ -72,18 +74,54 @@ app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
   next();
 });
-
+//generate token
+const generateAccessToken = (user) =>{
+  return jwt.sign({id:user.id,username:user.username},jwtSecret,)
+}
+const generateRefreshToken = (user) =>{
+return jwt.sign({id :user.id,username: user.username},jwtSecret,{expiresIn :'7d'}) 
+}
 // API Routes
-const users = [{username :'houssem',password :'123'}]
+const users = [{
+  id:'125055454762465',username :'houssem',password :'123'
+},
+{id:'1212646156545',username :'walid',password :'456'}]
 app.post('/login',(req,res) =>{
 const credentials = {username : req.body.username,password : req.body.password}
+console.log(credentials)
  const user = users.find(user => user.username == credentials.username && user.password == credentials.password)
 if (!user) {
   res.status(401).json({message:'invalid user'})
 }
-res.status(200).json({message : 'login accepted'})
+const accessToken  = generateAccessToken(user)
+const refreshToken = generateRefreshToken(user)
+console.log(refreshToken)
+// set refreshToken in http Only
+res.cookie('refreshToken' ,refreshToken,{
+  httpOnly:true,
+  sameSite:'strict',
+  maxAge : 1000*60*60*24*7 // 7 days
 })
-
+res.status(200).json({accessToken})
+})
+//try to refresh token
+app.post('/refresh',(req,res) =>{
+  const refreshToken = req.cookies.refreshToken;
+  if (!refreshToken) {
+    res.status(401).json({message : 'no refreshToken redirect to login '})
+  }
+try {
+    const decode = jwt.verify(refreshToken,refreshSecret)
+  const user = users.find(user =>user.id === decode.id)
+  if (!user){
+    return res.status(401).json('invalid refresh token')
+  }
+  const accessToken = generateAccessToken(user)
+  res.json({accessToken})
+} catch (error) {
+  res.status(401).json({message : 'invalid refresh token'})
+}
+}) 
 // Example API routes
 app.get('/api/users', (req, res) => {
   const users = [
