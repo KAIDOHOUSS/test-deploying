@@ -37,7 +37,7 @@ export const teachers = [
   { id: 5, username: "ياسر", comment: "شكراً لكم على هذا الجهد" },
   ]
   export  const services = [
-    { id: 1, title: 'Web Development', description: 'Custom web applications built with modern technologies', icon: '🟡' ,img:'/ph/cour1.jpg',level :'Medium' },
+    { id: 1, title: 'Web Development', description: 'Custom web applications built with modern technologies', icon: '🟡' ,img:'/ph/jscourse.jpg',level :'Medium' },
     { id: 2, title: 'Mobile Development', description: 'Native and cross-platform mobile applications', icon: '🟢',img:'/ph/cour1.jpg' , level :'Beginner' },
     { id: 3, title: 'Cloud Solutions', description: 'Scalable cloud infrastructure and deployment', icon: '🔴' ,img :'/ph/cour1.jpg',level :'Advanced'},
     { id: 4, title: 'Consulting', description: 'Technical consulting and architecture planning', icon: '🟢',img :'/ph/cour1.jpg' , level : 'Beginner'},

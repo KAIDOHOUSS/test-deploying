@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Slide from '../bootstrap/SlideImages';
+import Slide from '../Styling/SlideImages';
 const HomePage = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);

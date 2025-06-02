@@ -2,11 +2,14 @@ import {teachers} from '../data/data'
 import {comments} from '../data/data'
 import { FaUserAlt } from "react-icons/fa";
 import { FaUserTie } from "react-icons/fa6";
+import { AppContext } from './AppContextProvider';
+import { useContext } from 'react';
 const AboutPage = () => {
+  const {accessToken} = useContext(AppContext)
   return (
     <>
       <header className="app-header">
-        <h1>About Us</h1>
+        {accessToken &&<h1>About Us</h1>}
         <p>Learn more about our company and mission</p>
       </header>
       <main className="main-content">

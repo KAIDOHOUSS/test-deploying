@@ -21,7 +21,7 @@ const ServicesPage = () => {
                  <div className="service-icon">{service.icon} <span>{service.level}</span></div>
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
-                <Link to={`/services/${service.id}`} replace>
+                <Link to={`/services/${service.id}`} >
                 <button className="btn btn-primary">Learn More</button>
                 </Link>
                </div>

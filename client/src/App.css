@@ -1,5 +1,6 @@
 /* Reset and base styles */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -237,7 +238,9 @@ body {
     padding: 0 1rem;
     height: 64px;
   }
-  
+  .service-card{
+    flex-direction: column;
+  }
   .navi-menu {
     display: none;
     position: fixed;
@@ -296,6 +299,10 @@ body {
 }
 
 @media (max-width: 480px) {
+  .service-image{
+    height: 70px;
+    width: 50%;
+  }
   .nav-container {
     padding: 0 0.75rem;
   }
@@ -755,7 +762,7 @@ text-align: right;
 }
 
 .service-card {
-  padding: 0 2rem;
+  padding: 2rem;
   background: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border: 1px solid #e5e7eb;
@@ -779,7 +786,7 @@ text-align: right;
   margin-bottom: 1rem;
 }
 .service-image{
-  height: 400px;
+  height: 300px;
   margin: 0;
   padding: 0;
 }
@@ -866,6 +873,7 @@ text-align: right;
 /*login page */
 .login-main-pic-container{
   width: 500px;
+  min-height: 200px;
   overflow: hidden;
   border: 1px solid greenyellow;
   border-radius: 46% 54% 49% 51% / 28% 51% 49% 72% ;
@@ -899,6 +907,77 @@ height: auto;
   color: blue;
   cursor: pointer;
 }
+.error-message{
+  
+}
+/* detailed service*/
+li {
+	--stop: calc(100% / var(--length) * var(--i));
+	--l: 62%;
+	--l2: 88%;
+	--h: calc((var(--i) - 1) * (180 / var(--length)));
+	--c1: hsl(var(--h), 71%, var(--l));
+	--c2: hsl(var(--h), 71%, var(--l2));
+	
+	position: relative;
+	counter-increment: list;
+	max-width: 45rem;
+	margin: 2rem auto;
+	padding: 2rem 1rem 1rem;
+	box-shadow: 0.1rem 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
+	border-radius: 0.25rem;
+	overflow: hidden;
+	background-color: white;
+}
+
+li::before {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 1rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: linear-gradient(to right, var(--c1) var(--stop), var(--c2) var(--stop));
+}
+
+h3 {
+	display: flex;
+	align-items: baseline;
+	margin: 0 0 1rem;
+	color: rgb(70 70 70);
+}
+
+h3::before {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex: 0 0 auto;
+	margin-right: 1rem;
+	width: 3rem;
+	height: 3rem;
+	content: counter(list);
+	padding: 1rem;
+	border-radius: 50%;
+	background-color: var(--c1);
+	color: white;
+}
+
+@media (min-width: 40em) {
+	li {
+		margin: 3rem auto;
+		padding: 3rem 2rem 2rem;
+	}
+	
+	h3 {
+		font-size: 2.25rem;
+		margin: 0 0 2rem;
+	}
+	
+	h3::before {
+		margin-right: 1.5rem;
+	}
+}
 /* Footer */
 .app-footer {
   background: rgba(255, 255, 255, 0.15);
@@ -913,6 +992,9 @@ height: auto;
 
 /* Responsive design */
 @media (max-width: 1024px) {
+  .service-image{
+    width: 50%;
+  }
   .login-main-pic-container{
     width: 300px;
   }
@@ -979,6 +1061,8 @@ height: auto;
   }
   .service-card{
     flex-direction: column;
+  }.service-image{
+  height: 200px;
   }
   .app-header h1 {
     font-size: 1.875rem;

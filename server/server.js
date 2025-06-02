@@ -74,13 +74,15 @@ app.use((req, res, next) => {
 });
 
 // API Routes
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
-  });
-});
+const users = [{username :'houssem',password :'123'}]
+app.post('/login',(req,res) =>{
+const credentials = {username : req.body.username,password : req.body.password}
+ const user = users.find(user => user.username == credentials.username && user.password == credentials.password)
+if (!user) {
+  res.status(401).json({message:'invalid user'})
+}
+res.status(200).json({message : 'login accepted'})
+})
 
 // Example API routes
 app.get('/api/users', (req, res) => {
